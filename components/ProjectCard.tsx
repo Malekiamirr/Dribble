@@ -13,7 +13,7 @@ type Props = {
   userId: string;
 };
 
-function ProjectCard({ id, image, title, name, avatarUrl, userId }: Props) {
+const ProjectCard = ({ id, image, title, name, avatarUrl, userId }: Props) => {
   const [randomLikes, setRandomLikes] = useState(0);
   const [randomViews, setRandomViews] = useState('');
 
@@ -35,7 +35,7 @@ function ProjectCard({ id, image, title, name, avatarUrl, userId }: Props) {
           width={414}
           height={314}
           className="w-full h-full object-cover rounded-2xl"
-          alt="Project image"
+          alt="project image"
         />
 
         <div className="hidden group-hover:flex profile_card-title">
@@ -51,7 +51,7 @@ function ProjectCard({ id, image, title, name, avatarUrl, userId }: Props) {
               width={24}
               height={24}
               className="rounded-full"
-              alt="Profile image"
+              alt="profile image"
             />
             <p>{name}</p>
           </div>
@@ -59,18 +59,17 @@ function ProjectCard({ id, image, title, name, avatarUrl, userId }: Props) {
 
         <div className="flexCenter gap-3">
           <div className="flexCenter gap-2">
-            <Image src={'/hearth.svg'} width={13} height={12} alt="heart" />
+            <Image src="/hearth.svg" width={13} height={12} alt="heart" />
             <p className="text-sm">{randomLikes}</p>
           </div>
-
           <div className="flexCenter gap-2">
-            <Image src={'/eye.svg'} width={13} height={12} alt="eye" />
+            <Image src="/eye.svg" width={12} height={9} alt="eye" />
             <p className="text-sm">{randomViews}</p>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default ProjectCard;

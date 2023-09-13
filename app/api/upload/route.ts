@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
+import { NextResponse } from 'next/server';
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -12,10 +12,11 @@ export async function POST(request: Request) {
 
   if (!path) {
     return NextResponse.json(
-      { message: 'Image path is requierd' },
+      { message: 'Image path is required' },
       { status: 400 }
     );
   }
+
   try {
     const options = {
       use_filename: true,
@@ -25,8 +26,12 @@ export async function POST(request: Request) {
     };
 
     const result = await cloudinary.uploader.upload(path, options);
+
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ message: error }, { status: 500 });
+    return NextResponse.json(
+      { message: 'Failed to upload image on Cloudinary' },
+      { status: 500 }
+    );
   }
 }

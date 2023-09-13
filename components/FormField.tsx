@@ -7,14 +7,14 @@ type Props = {
   setState: (value: string) => void;
 };
 
-function FormField({
+const FormField = ({
   type,
   title,
   state,
   placeholder,
   isTextArea,
   setState,
-}: Props) {
+}: Props) => {
   return (
     <div className="flexStart flex-col w-full gap-4">
       <label className="w-full text-gray-100">{title}</label>
@@ -23,7 +23,6 @@ function FormField({
         <textarea
           placeholder={placeholder}
           value={state}
-          required
           className="form_field-input"
           onChange={e => setState(e.target.value)}
         />
@@ -31,14 +30,14 @@ function FormField({
         <input
           type={type || 'text'}
           placeholder={placeholder}
-          value={state}
           required
+          value={state}
           className="form_field-input"
           onChange={e => setState(e.target.value)}
         />
       )}
     </div>
   );
-}
+};
 
 export default FormField;

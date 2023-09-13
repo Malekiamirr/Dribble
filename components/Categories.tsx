@@ -4,15 +4,15 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { categoryFilters } from '@/constants';
 
-function Categories() {
+const Categories = () => {
   const router = useRouter();
-  const pathname = usePathname();
+  const pathName = usePathname();
   const searchParams = useSearchParams();
 
   const category = searchParams.get('category');
 
-  const handleTags = (filter: string) => {
-    router.push(`${pathname}?category=${filter}`);
+  const handleTags = (item: string) => {
+    router.push(`${pathName}?category=${item}`);
   };
 
   return (
@@ -35,6 +35,6 @@ function Categories() {
       </ul>
     </div>
   );
-}
+};
 
 export default Categories;

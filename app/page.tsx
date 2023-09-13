@@ -1,7 +1,7 @@
 import { ProjectInterface } from '@/common.types';
-import Categories from '@/app/components/Categories';
-import LoadMore from '@/app/components/LoadMore';
-import ProjectCard from '@/app/components/ProjectCard';
+import Categories from '@/components/Categories';
+import LoadMore from '@/components/LoadMore';
+import ProjectCard from '@/components/ProjectCard';
 import { fetchAllProjects } from '@/lib/actions';
 
 type SearchParams = {

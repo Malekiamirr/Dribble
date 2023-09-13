@@ -9,7 +9,7 @@ import {
   getProjectsOfUserQuery,
   getUserQuery,
   projectsQuery,
-} from '@/graphQL';
+} from '@/graphql';
 import { ProjectForm } from '@/common.types';
 import { categoryFilters } from '@/constants';
 

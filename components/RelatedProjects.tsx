@@ -1,17 +1,16 @@
-import { UserProfile, ProjectInterface } from '@/common.types';
-import { getUserProjects } from '@/lib/actions';
-import Image from 'next/image';
 import Link from 'next/link';
+
+import { getUserProjects } from '@/lib/actions';
+import { ProjectInterface, UserProfile } from '@/common.types';
+import Image from 'next/image';
 
 type Props = {
   userId: string;
   projectId: string;
 };
 
-async function RelatedProjects({ userId, projectId }: Props) {
-  const result = (await getUserProjects(userId)) as {
-    user?: UserProfile;
-  };
+const RelatedProjects = async ({ userId, projectId }: Props) => {
+  const result = (await getUserProjects(userId)) as { user?: UserProfile };
 
   const filteredProjects = result?.user?.projects?.edges?.filter(
     ({ node }: { node: ProjectInterface }) => node?.id !== projectId
@@ -31,7 +30,7 @@ async function RelatedProjects({ userId, projectId }: Props) {
         </Link>
       </div>
 
-      <div className="related_project-grid">
+      <div className="related_projects-grid">
         {filteredProjects?.map(({ node }: { node: ProjectInterface }) => (
           <div className="flexCenter related_project-card drop-shadow-card">
             <Link
@@ -43,7 +42,7 @@ async function RelatedProjects({ userId, projectId }: Props) {
                 width={414}
                 height={314}
                 className="w-full h-full object-cover rounded-2xl"
-                alt="Project image"
+                alt="project image"
               />
 
               <div className="hidden group-hover:flex related_project-card_title">
@@ -55,6 +54,6 @@ async function RelatedProjects({ userId, projectId }: Props) {
       </div>
     </section>
   );
-}
+};
 
 export default RelatedProjects;

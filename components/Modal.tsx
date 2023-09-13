@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useCallback, useRef, ReactNode } from 'react';
-import { useRouter } from 'next/router';
+import { useCallback, useRef, ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
-function Modal({ children }: { children: ReactNode }) {
+export default function Modal({ children }: { children: ReactNode }) {
   const overlay = useRef<HTMLDivElement>(null);
   const wrapper = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -14,7 +14,7 @@ function Modal({ children }: { children: ReactNode }) {
   }, [router]);
 
   const handleClick = useCallback(
-    (e: React.MouseEvent) => {
+    (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === overlay.current && onDismiss) {
         onDismiss();
       }
@@ -23,7 +23,7 @@ function Modal({ children }: { children: ReactNode }) {
   );
 
   return (
-    <div ref={overlay} className="model" onClick={handleClick}>
+    <div ref={overlay} className="modal" onClick={e => handleClick(e)}>
       <button
         type="button"
         onClick={onDismiss}
@@ -32,11 +32,9 @@ function Modal({ children }: { children: ReactNode }) {
         <Image src="/close.svg" width={17} height={17} alt="close" />
       </button>
 
-      <div ref={wrapper} className="model_wrapper">
+      <div ref={wrapper} className="modal_wrapper">
         {children}
       </div>
     </div>
   );
 }
-
-export default Modal;

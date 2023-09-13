@@ -1,18 +1,23 @@
 'use client';
 
-import { deleteProject, fetchToken } from '@/lib/actions';
-import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-function ProjectActions({ projectId }: { projectId: string }) {
+import { deleteProject, fetchToken } from '@/lib/actions';
+
+type Props = {
+  projectId: string;
+};
+
+const ProjectActions = ({ projectId }: Props) => {
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const router = useRouter();
-
-  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDeleteProject = async () => {
     setIsDeleting(true);
+
     const { token } = await fetchToken();
 
     try {
@@ -20,7 +25,7 @@ function ProjectActions({ projectId }: { projectId: string }) {
 
       router.push('/');
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsDeleting(false);
     }
@@ -37,6 +42,7 @@ function ProjectActions({ projectId }: { projectId: string }) {
 
       <button
         type="button"
+        disabled={isDeleting}
         className={`flexCenter delete-action_btn ${
           isDeleting ? 'bg-gray' : 'bg-primary-purple'
         }`}
@@ -46,6 +52,6 @@ function ProjectActions({ projectId }: { projectId: string }) {
       </button>
     </>
   );
-}
+};
 
 export default ProjectActions;
